@@ -162,7 +162,7 @@ local getSortFunction, comparePriority, direction
 -- Raid Info
 local getSortedRaidGroup, getRaidGroupInfo, getPlayerInfo, getUnits
 -- Helpers
-local shouldSort, handleQueuedUpdate, addUpdateToQueue, canelQueuedUpdate
+local shouldSort, handleQueuedUpdate, addUpdateToQueue, cancelQueuedUpdate
 local isValidPlayers, isValidPlayerInfo
 -- Calback
 local RaidFrame_UpdateLayout
@@ -659,11 +659,11 @@ end
 ---@return boolean
 shouldSort = function()
     if Cell.vars.groupType ~= "raid" then
-        canelQueuedUpdate(true)
+        cancelQueuedUpdate(true)
         return false
     end
     if InCombatLockdown() then
-        canelQueuedUpdate()
+        cancelQueuedUpdate()
         return false
     end
 
@@ -693,7 +693,7 @@ end
 
 --- Cancels queued update timer. fullReset will reset updateIsQued
 ---@param fullReset? boolean
-canelQueuedUpdate = function(fullReset)
+cancelQueuedUpdate = function(fullReset)
     if fullReset then updateIsQued = false end
     if queuedUpdate then queuedUpdate:Cancel() end
 end
