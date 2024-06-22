@@ -671,7 +671,8 @@ shouldSort = function()
 end
 
 handleQueuedUpdate = function()
-    if not updateIsQued or not shouldSort() then return end
+    local doSort = updateIsQued or shouldSort()
+    if not doSort then return end
 
     updateIsQued = false
     sortRaidFrames()
